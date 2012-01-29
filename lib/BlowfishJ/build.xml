@@ -1,0 +1,27 @@
+<project name="BlowfishJ" basedir="." default="main">
+
+	<property name="src.dir"     value="."/>
+
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+
+    <target name="clean">
+	<delete dir="build"/>
+    </target>
+
+    <target name="compile">
+	<mkdir dir="build/classes"/>
+	<javac srcdir="${src.dir}" includes="BlowfishJ/*.java" excludes="BlowfishJ/test/**" destdir="${classes.dir}"/>
+    </target>
+
+    <target name="jar" depends="compile">
+	<mkdir dir="build/jar"/>
+	<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+	</jar>
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+    <target name="main" depends="jar"/>
+</project>
